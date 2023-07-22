@@ -1,2 +1,3 @@
 # deadnews-template-docker
-Docker Project Template 
+
+> Docker Project Template
