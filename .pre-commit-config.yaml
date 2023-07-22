@@ -1,0 +1,46 @@
+ci:
+  autofix_commit_msg: "chore: auto fixes from `pre-commit` hooks"
+  autoupdate_commit_msg: "chore(pre-commit): autoupdate"
+  autoupdate_schedule: quarterly
+  skip: [hadolint]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.0-alpha.9-for-vscode
+    hooks:
+      - id: prettier
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.15.9
+    hooks:
+      - id: typos
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.23.2
+    hooks:
+      - id: check-github-workflows
+      - id: check-renovate
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.7.0-1
+    hooks:
+      - id: shfmt
+        types: []
+        types_or: [shell, dockerfile]
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
