@@ -1,4 +1,4 @@
-FROM python:3.11-alpine@sha256:25df32b602118dab046b58f0fe920e3301da0727b5b07430c8bcd4b139627fdc
+FROM python:3.11-alpine@sha256:5d769f990397afbb2aca24b0655e404c0f2806d268f454b052e81e39d87abf42
 LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
 
 # renovate: datasource=pypi dep_name=pre-commit
