@@ -73,3 +73,22 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+      # Analyze vulnerabilities
+      - name: Analyze for critical and high CVEs
+        id: docker-scout-cves
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: docker/scout-action@64ca6fb5e6ada64f5febd1a991b499900b29faf0 # v0.23.4
+        with:
+          command: cves
+          image: ${{ steps.meta.outputs.tags }}
+          sarif-file: sarif.output.json
+          summary: true
+
+      # Upload report to GitHub code scanning
+      - name: Upload SARIF result
+        id: upload-sarif
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: sarif.output.json
