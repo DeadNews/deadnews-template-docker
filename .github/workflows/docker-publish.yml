@@ -22,21 +22,23 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
+      # To upload sarif files.
+      security-events: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Install the cosign tool except on PR
+      # Install the cosign tool except on PR.
       - name: Install cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 # v3.1.1
 
-      # Using it to be able to build multi-platform images, export cache, etc
+      # Using it to be able to build multi-platform images, export cache, etc.
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@4c0219f9ac95b02789c1075625400b2acbff50b1 # v2.9.1
 
-      # Login against a Docker registry except on PR
+      # Login against a Docker registry except on PR.
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
         uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
@@ -45,14 +47,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Extract metadata (tags, labels) for Docker
+      # Extract metadata (tags, labels) for Docker.
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@818d4b7b91585d195f67373fd9cb0332e31a7175 # v4.6.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # Build and push Docker image with Buildx (don't push on PR)
+      # Build and push Docker image with Buildx (don't push on PR).
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825 # v4.1.1
@@ -74,7 +76,7 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-      # Analyze vulnerabilities
+      # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: ${{ github.event_name != 'pull_request' }}
         uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
@@ -83,7 +85,7 @@ jobs:
           format: "sarif"
           output: "trivy-results.sarif"
 
-      # Upload report to GitHub code scanning
+      # Upload report to GitHub code scanning.
       - name: Upload Trivy scan results to GitHub Security tab
         if: ${{ github.event_name != 'pull_request' }}
         uses: github/codeql-action/upload-sarif@v2
