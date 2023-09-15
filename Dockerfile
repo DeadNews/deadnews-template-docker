@@ -4,7 +4,6 @@ LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
 # renovate: datasource=pypi dep_name=pre-commit
 ENV PRE_COMMIT_VERSION="3.3.3"
 
-RUN adduser -D pre-commit
 RUN apk add --no-cache \
     git \
     gcc \
@@ -12,4 +11,4 @@ RUN apk add --no-cache \
 RUN pip install --no-cache-dir \
     pre-commit==${PRE_COMMIT_VERSION}
 
-USER pre-commit
+USER guest
