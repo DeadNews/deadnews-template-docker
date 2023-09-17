@@ -1,14 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", "github>DeadNews/renovate-config"],
-  "packageRules": [
-    {
-      "addLabels": ["docker"],
-      "description": "Pin docker tags",
-      "matchDatasources": ["docker"],
-      "pinDigests": true
-    }
-  ],
   "regexManagers": [
     {
       "fileMatch": ["Dockerfile$"],
