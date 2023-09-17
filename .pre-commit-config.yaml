@@ -2,7 +2,7 @@ ci:
   autofix_commit_msg: "chore: auto fixes from `pre-commit` hooks"
   autoupdate_commit_msg: "chore(pre-commit): autoupdate"
   autoupdate_schedule: quarterly
-  skip: [hadolint]
+  skip: [hadolint-docker]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -44,11 +44,6 @@ repos:
       - id: shfmt
         types: []
         types_or: [shell, dockerfile]
-
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
-    hooks:
-      - id: hadolint
 
   - repo: https://github.com/hadolint/hadolint
     rev: v2.12.0
