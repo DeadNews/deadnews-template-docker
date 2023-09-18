@@ -16,7 +16,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
+  scanner:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
@@ -25,7 +25,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           format: "sarif"
           output: "trivy-results.sarif"
 
