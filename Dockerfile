@@ -12,3 +12,4 @@ RUN pip install --no-cache-dir \
     pre-commit==${PRE_COMMIT_VERSION}
 
 USER guest
+HEALTHCHECK NONE
