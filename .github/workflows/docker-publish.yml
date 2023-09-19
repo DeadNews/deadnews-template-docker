@@ -18,14 +18,16 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Build Docker image
+    # Map a step output to a job output
+    outputs:
+      image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
     permissions:
       packages: write
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
-      # To upload sarif files.
-      security-events: write
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -89,12 +91,20 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
+  scan:
+    name: Scan Docker image
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [build]
+    permissions:
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: startsWith(github.ref, 'refs/tags/')
         uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # 0.12.0
         with:
-          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          image-ref: ${{needs.build.outputs.image-ref}}
           format: "sarif"
           output: "trivy-results.sarif"
 
