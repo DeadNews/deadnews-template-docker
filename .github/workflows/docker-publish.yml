@@ -96,7 +96,8 @@ jobs:
         run: |
           echo "Output [${{ steps.meta.outputs.json }}]"
           echo "Output [${{ fromJSON(steps.meta.outputs.json) }}]"
-
+          echo "Output [${{ fromJSON(steps.meta.outputs.json).tags }}]"
+          echo "Output [${{ fromJSON(steps.meta.outputs.json).tags[0] }}]"
 
       # # Analyze vulnerabilities.
       # - name: Run Trivy vulnerability scanner
