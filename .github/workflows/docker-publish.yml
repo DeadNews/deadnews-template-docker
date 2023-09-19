@@ -15,6 +15,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  SCAN_IMAGE: ""
 
 jobs:
   build:
@@ -65,8 +66,6 @@ jobs:
             type=semver,pattern={{major}}
             type=ref,event=branch
             type=ref,event=pr
-            type=sha
-            type=sha,format=long
 
       # Build and push Docker image with Buildx (don't push on PR).
       - name: Build and push Docker image
@@ -91,12 +90,17 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
+      # Image for scanning.
+      - name: Set SCAN_IMAGE environment variable.
+        run: |
+          echo "SCAN_IMAGE=$(echo ${{ steps.meta.outputs.tags }} | cut -d' ' -f1)" >> $GITHUB_ENV
+
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: ${{ github.event_name != 'pull_request' }}
         uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
         with:
-          image-ref: ghcr.io/deadnews/deadnews-template-docker:sha-${{ github.sha }}
+          image-ref: ${{ env.SCAN_IMAGE }}
           format: "sarif"
           output: "trivy-results.sarif"
 
