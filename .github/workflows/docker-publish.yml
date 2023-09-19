@@ -66,6 +66,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=sha
+            type=sha,format=long
 
       # Build and push Docker image with Buildx (don't push on PR).
       - name: Build and push Docker image
@@ -95,7 +96,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ghcr.io/deadnews/deadnews-template-docker:${{ github.sha }}
           format: "sarif"
           output: "trivy-results.sarif"
 
