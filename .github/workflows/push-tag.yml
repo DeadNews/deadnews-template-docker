@@ -1,8 +1,6 @@
 name: Push Tag
 
 on:
-  push:
-    branches: ["main"]
   schedule:
     # At 04:42 on day-of-month 2 and 16.
     - cron: 42 4 2,16 * *
