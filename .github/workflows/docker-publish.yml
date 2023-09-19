@@ -65,6 +65,7 @@ jobs:
             type=semver,pattern={{major}}
             type=ref,event=branch
             type=ref,event=pr
+            type=sha
 
       # Build and push Docker image with Buildx (don't push on PR).
       - name: Build and push Docker image
@@ -88,11 +89,6 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-
-      # Image for scanning.
-      - name: Set SCAN_IMAGE environment variable.
-        run: |
-          echo "SCAN_IMAGE=$(echo ${{ steps.meta.outputs.tags }} | cut -d' ' -f1)" >> $GITHUB_ENV
 
       # Select image for scanning.
       - name: Image for scanning
