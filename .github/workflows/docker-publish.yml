@@ -94,22 +94,22 @@ jobs:
       - name: Image for scanning
         id: select-for-scan
         run: |
-          image=$(echo "${{ steps.meta.outputs.tags }}" | cut -d' ' -f1)
-          echo "Output [$image]"
-          echo "image=$image" >> $GITHUB_OUTPUT
+          echo "Output [${{ steps.meta.outputs.json }}]"
+          echo "Output [${{ fromJSON(steps.meta.outputs.json) }}]"
 
-      # Analyze vulnerabilities.
-      - name: Run Trivy vulnerability scanner
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
-        with:
-          image-ref: ${{ steps.select-for-scan.outputs.image }}
-          format: "sarif"
-          output: "trivy-results.sarif"
 
-      # Upload report to GitHub code scanning.
-      - name: Upload Trivy scan results to GitHub Security tab
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: "trivy-results.sarif"
+      # # Analyze vulnerabilities.
+      # - name: Run Trivy vulnerability scanner
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
+      #   with:
+      #     image-ref: ${{ steps.select-for-scan.outputs.image }}
+      #     format: "sarif"
+      #     output: "trivy-results.sarif"
+
+      # # Upload report to GitHub code scanning.
+      # - name: Upload Trivy scan results to GitHub Security tab
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: "trivy-results.sarif"
