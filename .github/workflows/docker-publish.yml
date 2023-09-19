@@ -65,7 +65,6 @@ jobs:
             type=semver,pattern={{major}}
             type=ref,event=branch
             type=ref,event=pr
-            type=sha
 
       # Build and push Docker image with Buildx (don't push on PR).
       - name: Build and push Docker image
@@ -90,27 +89,18 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-      # Select image for scanning.
-      - name: Image for scanning
-        id: select-for-scan
-        run: |
-          echo "Output [${{ steps.meta.outputs.json }}]"
-          echo "Output [${{ fromJSON(steps.meta.outputs.json) }}]"
-          echo "Output [${{ fromJSON(steps.meta.outputs.json).tags }}]"
-          echo "Output [${{ fromJSON(steps.meta.outputs.json).tags[0] }}]"
+      # Analyze vulnerabilities.
+      - name: Run Trivy vulnerability scanner
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # 0.12.0
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          format: "sarif"
+          output: "trivy-results.sarif"
 
-      # # Analyze vulnerabilities.
-      # - name: Run Trivy vulnerability scanner
-      #   if: ${{ github.event_name != 'pull_request' }}
-      #   uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
-      #   with:
-      #     image-ref: ${{ steps.select-for-scan.outputs.image }}
-      #     format: "sarif"
-      #     output: "trivy-results.sarif"
-
-      # # Upload report to GitHub code scanning.
-      # - name: Upload Trivy scan results to GitHub Security tab
-      #   if: ${{ github.event_name != 'pull_request' }}
-      #   uses: github/codeql-action/upload-sarif@v2
-      #   with:
-      #     sarif_file: "trivy-results.sarif"
+      # Upload report to GitHub code scanning.
+      - name: Upload Trivy scan results to GitHub Security tab
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results.sarif"
