@@ -15,4 +15,7 @@ permissions:
 
 jobs:
   docker:
+    name: Docker
     uses: ./.github/workflows/docker-reusable.yml
+    with:
+      build-platforms: linux/amd64
