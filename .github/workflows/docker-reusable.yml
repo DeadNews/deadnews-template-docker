@@ -30,8 +30,7 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       # Install the cosign tool except on PR.
       - name: Install cosign
@@ -100,6 +99,8 @@ jobs:
       security-events: write
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: startsWith(github.ref, 'refs/tags/')
