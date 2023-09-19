@@ -3,6 +3,9 @@ name: Push Tag
 on:
   push:
     branches: ["main"]
+  schedule:
+    # At 04:42 on day-of-month 2 and 16.
+    - cron: 42 4 2,16 * *
 
 permissions:
   contents: write
@@ -16,8 +19,11 @@ jobs:
 
       # Automatically creates and updates the latest tag
       - name: Push Tag
+        env:
+          TAG: latest
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git tag -a "latest" -m "auto push tag" --force
-          git push origin "latest" --force
+
+          git tag -a ${TAG} -m autoupdate -f
+          git push origin ${TAG} -f
