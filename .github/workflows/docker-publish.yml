@@ -15,7 +15,6 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  SCAN_IMAGE: ""
 
 jobs:
   build:
@@ -95,12 +94,20 @@ jobs:
         run: |
           echo "SCAN_IMAGE=$(echo ${{ steps.meta.outputs.tags }} | cut -d' ' -f1)" >> $GITHUB_ENV
 
+      # Select image for scanning.
+      - name: Image for scanning
+        id: select-for-scan
+        run: |
+          image=$(echo "${{ steps.meta.outputs.tags }}" | cut -d' ' -f1)
+          echo "Output [$image]"
+          echo "image=$image" >> $GITHUB_OUTPUT
+
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: ${{ github.event_name != 'pull_request' }}
         uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
         with:
-          image-ref: ${{ env.SCAN_IMAGE }}
+          image-ref: ${{ steps.select-for-scan.outputs.image }}
           format: "sarif"
           output: "trivy-results.sarif"
 
