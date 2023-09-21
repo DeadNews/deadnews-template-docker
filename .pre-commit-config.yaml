@@ -45,6 +45,12 @@ repos:
         types: []
         types_or: [shell, dockerfile]
 
+  - repo: https://github.com/bridgecrewio/checkov
+    rev: 2.4.47
+    hooks:
+      - id: checkov
+        files: ""
+
   - repo: https://github.com/hadolint/hadolint
     rev: v2.12.0
     hooks:
