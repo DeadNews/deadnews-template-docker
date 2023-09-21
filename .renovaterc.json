@@ -1,13 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", "github>DeadNews/renovate-config"],
-  "regexManagers": [
-    {
-      "fileMatch": ["Dockerfile$"],
-      "matchStrings": [
-        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) dep_name=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=\"(?<currentValue>.*)\"\\s"
-      ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
-  ]
+  "extends": ["config:base", "github>DeadNews/renovate-config"]
 }
