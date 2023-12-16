@@ -1,4 +1,4 @@
-FROM busybox:1.36.1-musl@sha256:f553b7484625f0c73bfa3888e013e70e99ec6ae1c424ee0e8a85052bd135a28a
+FROM busybox:1.36.1-musl@sha256:0f287c70d4bda87a5b1ea97831c4b0f8b7c2b7c87279c0dc673b1ec600f40854
 LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
 
 USER nobody:nobody
