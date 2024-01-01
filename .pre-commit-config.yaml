@@ -18,12 +18,12 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.1.0
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.16.25
+    rev: v1.16.26
     hooks:
       - id: typos
 
@@ -39,13 +39,13 @@ repos:
       - id: actionlint
 
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.7.0-1
+    rev: v3.7.0-4
     hooks:
       - id: shfmt
         types: []
         types_or: [shell, dockerfile]
 
   - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
+    rev: v2.12.1-beta
     hooks:
       - id: hadolint-docker
