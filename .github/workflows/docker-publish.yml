@@ -17,5 +17,13 @@ jobs:
   docker:
     name: Docker
     uses: ./.github/workflows/docker-reusable.yml
+
+  docker-glibc:
+    name: Docker GNU C Library
+    uses: ./.github/workflows/docker-reusable.yml
     with:
-      build-platforms: linux/amd64
+      dockerfile: Dockerfile.glibc
+      build-platforms: linux/amd64,linux/arm64
+      flavor: |
+        latest=auto
+        suffix=glibc
