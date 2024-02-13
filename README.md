@@ -36,7 +36,7 @@ jobs:
       flavor: |
         latest=auto
         prefix=
-        suffix=pypy
+        suffix=-pypy
 ```
 
 - The `latest` tag is auto-updated when the workflow file is modified.
