@@ -27,7 +27,7 @@ jobs:
     uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@latest
     with:
       dockerfile: Dockerfile.pypy
-      build-args: EXAMPLE_VAR=value1
+      build-args: BASE_IMAGE=pypy:3.10-slim
       build-platforms: linux/amd64,linux/arm64
       flavor: |
         suffix=-pypy
