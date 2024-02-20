@@ -21,8 +21,16 @@ jobs:
   docker:
     name: Docker
     uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@latest
+
+  docker-pypy:
+    name: Docker PyPy
+    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@latest
     with:
+      dockerfile: Dockerfile.pypy
+      build-args: EXAMPLE_VAR=value1
       build-platforms: linux/amd64,linux/arm64
+      flavor: |
+        suffix=-pypy
 ```
 
-- The `latest` tag is auto-updated on a schedule.
+- The `latest` tag is auto-updated when the workflow file is modified.
