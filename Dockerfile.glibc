@@ -1,7 +1,0 @@
-FROM busybox:1.36.1-glibc@sha256:e046063223f7eaafbfbc026aa3954d9a31b9f1053ba5db04a4f1fdc97abd8963
-LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
-
-USER nobody:nobody
-HEALTHCHECK NONE
-
-CMD ["echo", "Hello, World!"]

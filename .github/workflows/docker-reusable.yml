@@ -12,11 +12,13 @@ on:
         default: Dockerfile
         description: Path to the Dockerfile.
         type: string
+      build-args:
+          default: ""
+          description: List of  build-time variables.
+          type: string
       build-platforms:
         default: linux/amd64
-        description: |
-          List of target platforms for build.
-          See `docker/build-push-action` for more details.
+        description: List of target platforms for build.
         type: string
       flavor:
         default: ""
@@ -100,6 +102,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: ${{ inputs.build-platforms }}
+          build-args: ${{ inputs.build-args }}
 
       # Sign the resulting Docker image digest except on PRs.
       - name: Sign the published Docker image
