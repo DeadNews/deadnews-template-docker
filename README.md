@@ -31,6 +31,7 @@ jobs:
       build-platforms: linux/amd64,linux/arm64
       flavor: |
         suffix=-pypy
+        latest=false
 ```
 
 - The `latest` tag is auto-updated when the workflow file is modified.
