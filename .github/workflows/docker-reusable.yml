@@ -116,7 +116,7 @@ jobs:
 
   scan:
     name: Scan image
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.ref_type == 'tag'
     needs: [build]
     permissions:
       security-events: write
@@ -126,7 +126,7 @@ jobs:
 
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.ref_type == 'tag'
         uses: aquasecurity/trivy-action@062f2592684a31eb3aa050cc61e7ca1451cecd3d # 0.18.0
         with:
           image-ref: ${{needs.build.outputs.image-ref}}
@@ -135,7 +135,7 @@ jobs:
 
       # Upload report to GitHub code scanning.
       - name: Upload Trivy scan results to GitHub Security tab
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.ref_type == 'tag'
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "trivy-results.sarif"
