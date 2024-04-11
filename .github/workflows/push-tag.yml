@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
 
+# TODO: try https://github.com/tj-actions/release-tagger
 jobs:
   push-tag:
     name: Push Tag
