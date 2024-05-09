@@ -24,18 +24,18 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.20.4
+    rev: v1.21.0
     hooks:
       - id: typos
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.28.1
+    rev: 0.28.3
     hooks:
       - id: check-github-workflows
       - id: check-renovate
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.6.27
+    rev: v1.7.0
     hooks:
       - id: actionlint
 
@@ -45,13 +45,13 @@ repos:
       - id: checkmake
 
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.7.0-1
+    rev: v3.8.0-1
     hooks:
       - id: shfmt
         types: []
         types_or: [shell, dockerfile]
 
   - repo: https://github.com/aleksac/hadolint-py
-    rev: v2.12.0
+    rev: v2.12.1b3
     hooks:
       - id: hadolint
