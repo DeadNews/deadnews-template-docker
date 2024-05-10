@@ -2,16 +2,30 @@ name: Main
 
 on:
   push:
+    branches: [main]
     tags:
       - "v*"
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf # v3.1.0
+        with:
+          dockerfile: Dockerfile
+
   github-deploy:
     name: Release to GitHub
     if: github.ref_type == 'tag'
+    needs: [lint]
     environment: github-releases
     permissions:
       contents: write
