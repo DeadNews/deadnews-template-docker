@@ -20,11 +20,11 @@ permissions:
 jobs:
   docker:
     name: Docker
-    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@latest
+    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@v1
 
   docker-pypy:
     name: Docker PyPy
-    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@latest
+    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@v1
     with:
       dockerfile: Dockerfile.pypy
       build-args: BASE_IMAGE=pypy:3.10-slim
@@ -33,4 +33,4 @@ jobs:
         suffix=-pypy,onlatest=true
 ```
 
-- The `latest` tag is auto-updated when the workflow file is modified.
+- [Example to get started](https://github.com/DeadNews/deadnews-template-docker/blob/main/.github/workflows/docker-publish.yml)
