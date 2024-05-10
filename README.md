@@ -33,4 +33,4 @@ jobs:
         suffix=-pypy,onlatest=true
 ```
 
-- [Example to get started](https://github.com/DeadNews/deadnews-template-docker/blob/main/.github/workflows/docker-publish.yml)
+[Example to get started](https://github.com/DeadNews/deadnews-template-docker/blob/main/.github/workflows/docker-publish.yml)
