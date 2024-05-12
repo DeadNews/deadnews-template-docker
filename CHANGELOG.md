@@ -1,18 +1,15 @@
 # Changelog
 
-## [unreleased]
+## [1.0.3](https://github.com/DeadNews/deadnews-template-docker/compare/v1.0.2...v1.0.3) - 2024-05-12
 
 ### 📚 Documentation
 
-- _(changelog)_ add `git-cliff` - ([e985d17](https://github.com/DeadNews/deadnews-template-docker/commit/e985d17c50971c9f714f926e7ffc0fec3cb5db6e))
+- _(changelog)_ add `git-cliff` ([#41](https://github.com/DeadNews/deadnews-template-docker/issues/41)) - ([0884d8a](https://github.com/DeadNews/deadnews-template-docker/commit/0884d8a17fa9292b5a435394cfb970e81e3029e2))
 - _(readme)_ add badges - ([a054910](https://github.com/DeadNews/deadnews-template-docker/commit/a054910582bc936c68b43f63bdcd3254d391c531))
-
-### 🧹 Chores
-
-- _(docs)_ update maintainer email - ([7efce30](https://github.com/DeadNews/deadnews-template-docker/commit/7efce30cdb8fc41ce71d463175ec23e00e55cf1c))
 
 ### ⚙️ CI/CD
 
+- _(github)_ add `release-tagger` workflow ([#42](https://github.com/DeadNews/deadnews-template-docker/issues/42)) - ([8fbbc50](https://github.com/DeadNews/deadnews-template-docker/commit/8fbbc504bad1eb9c3e2688abfe2bdbdfc1573aae))
 - _(pre-commit)_ replace `hadolint-docker` with `hadolint-py` - ([fc9fcf4](https://github.com/DeadNews/deadnews-template-docker/commit/fc9fcf4e011c93c22e03e12a32261ca819bb2a07))
 
 ## [1.0.2](https://github.com/DeadNews/deadnews-template-docker/compare/v1.0.1...v1.0.2) - 2024-02-22
