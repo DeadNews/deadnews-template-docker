@@ -20,11 +20,11 @@ permissions:
 jobs:
   docker:
     name: Docker
-    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@v1
+    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@main
 
   docker-pypy:
     name: Docker PyPy
-    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@v1
+    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@main
     with:
       dockerfile: Dockerfile.pypy
       build-args: BASE_IMAGE=pypy:3.10-slim
@@ -33,4 +33,6 @@ jobs:
         suffix=-pypy,onlatest=true
 ```
 
-[Example to get started](https://github.com/DeadNews/deadnews-template-docker/blob/main/.github/workflows/docker-publish.yml)
+Examples of valid GitHub tags: `main`, `v1`, `v1.0`, `v1.0.1`.
+
+[Example](https://github.com/DeadNews/deadnews-template-docker/blob/main/.github/workflows/docker-publish.yml) to get started.
