@@ -14,7 +14,7 @@ on:
         type: string
       build-args:
         default: ""
-        description: List of  build-time variables.
+        description: List of build-time variables.
         type: string
       build-platforms:
         default: linux/amd64

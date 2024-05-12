@@ -2,20 +2,32 @@ name: Main
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags:
+      - "v*"
 
 permissions:
   contents: read
 
 jobs:
-  lint:
-    name: Lint code
+  github-deploy:
+    name: Release to GitHub
+    if: github.ref_type == 'tag'
+    environment: github-releases
+    permissions:
+      contents: write
+    env:
+      CHANGELOG: https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md
+      PRERELEASE: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: hadolint/hadolint-action@54c9adbab1582c2ef04b2016b760714a4bfde3cf # v3.1.0
-        with:
-          dockerfile: Dockerfile
+      - name: Create GitHub Release
+        run: |
+          gh release create ${{ github.ref_name }} \
+            --title ${{ github.ref_name }} \
+            --notes="See [the CHANGELOG](${{ env.CHANGELOG }}) for more details." \
+            --draft=${{ env.PRERELEASE }} \
+            --prerelease=${{ env.PRERELEASE }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
