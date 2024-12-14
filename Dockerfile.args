@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=busybox:1.37.0-glibc@sha256:3757a0aac2f46c8f8f96dae75b7f2b633d745252ef9d46bdce9c588a564cfc84
+ARG BASE_IMAGE=busybox:1.37.0-glibc@sha256:c598938e58d0efcc5a01efe9059d113f22970914e05e39ab2a597a10f9db9bdc
 
 # hadolint ignore=DL3006
 FROM ${BASE_IMAGE}
