@@ -19,12 +19,12 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.1.0
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.28.3
+    rev: dictgen-v0.3.1
     hooks:
       - id: typos
 
@@ -35,7 +35,7 @@ repos:
       - id: check-renovate
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.4
+    rev: v1.7.6
     hooks:
       - id: actionlint
 
@@ -45,13 +45,13 @@ repos:
       - id: checkmake
 
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.8.0-1
+    rev: v3.10.0-2
     hooks:
       - id: shfmt
         types: []
         types_or: [shell, dockerfile]
 
   - repo: https://github.com/aleksac/hadolint-py
-    rev: v2.12.0
+    rev: v2.12.1b3
     hooks:
       - id: hadolint
