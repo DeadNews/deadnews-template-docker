@@ -1,4 +1,4 @@
-FROM busybox:1.37.0-musl@sha256:37ccc05112d0a7162b605c375f5c0f5cfbc6e6c4fc8030ead6ae26a18c28a542
+FROM busybox:1.37.0-musl@sha256:5b2531a497e1f4f0994272e72168d765cc54dc5da760e7bbac9c95aec383b137
 LABEL maintainer="DeadNews <deadnewsgit@gmail.com>"
 
 USER nobody:nobody
