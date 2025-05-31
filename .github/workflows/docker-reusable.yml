@@ -54,7 +54,7 @@ jobs:
       # Install the cosign tool except on PR.
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
+        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
 
       # Add support for more platforms with QEMU.
       - name: Setup QEMU
@@ -68,7 +68,7 @@ jobs:
       # Login against a Docker registry except on PR.
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -92,7 +92,7 @@ jobs:
       # Build and push Docker image with Buildx (don't push on PR).
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
         with:
           context: .
           file: ${{ inputs.dockerfile }}
@@ -127,7 +127,7 @@ jobs:
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: github.ref_type == 'tag'
-        uses: aquasecurity/trivy-action@18f2510ee396bbf400402947b394f2dd8c87dbb0 # 0.29.0
+        uses: aquasecurity/trivy-action@6c175e9c4083a92bbca2f9724c8a5e33bc2d97a5 # 0.30.0
         with:
           image-ref: ${{needs.build.outputs.image-ref}}
           format: "sarif"
