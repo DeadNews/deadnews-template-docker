@@ -54,7 +54,7 @@ jobs:
       # Install the cosign tool except on PR.
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
+        uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3.9.1
 
       # Add support for more platforms with QEMU.
       - name: Setup QEMU
@@ -63,7 +63,7 @@ jobs:
 
       # Using it to be able to build multi-platform images, export cache, etc.
       - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2 # v3.10.0
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
 
       # Login against a Docker registry except on PR.
       - name: Log into registry ${{ env.REGISTRY }}
@@ -127,7 +127,7 @@ jobs:
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: github.ref_type == 'tag'
-        uses: aquasecurity/trivy-action@6c175e9c4083a92bbca2f9724c8a5e33bc2d97a5 # 0.30.0
+        uses: aquasecurity/trivy-action@76071ef0d7ec797419534a183b498b4d6366cf37 # 0.31.0
         with:
           image-ref: ${{needs.build.outputs.image-ref}}
           format: "sarif"
