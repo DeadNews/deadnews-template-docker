@@ -2,8 +2,7 @@ name: Main
 
 on:
   push:
-    tags:
-      - "v*"
+    tags: [v*.*.*]
 
 permissions:
   contents: read

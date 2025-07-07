@@ -1,8 +1,3 @@
-# This GitHub Actions workflow builds and pushes a Docker image, and then scans it for vulnerabilities using Trivy.
-# It is triggered by a workflow call and requires inputs for the Dockerfile path, build platforms, and flavor.
-# The workflow uses various actions such as checkout, cosign-installer, setup-qemu-action, setup-buildx-action,
-# login-action, metadata-action, build-push-action, trivy-action, and upload-sarif to perform the necessary steps.
-
 name: Docker
 
 on:
