@@ -1,11 +1,11 @@
-.PHONY: all clean default install checks pc test
+.PHONY: all clean default install check pc test
 
-default: checks
+default: check
 
 install:
 	pre-commit install
 
-checks: pc
+check: pc
 pc:
 	pre-commit run -a
 
@@ -14,7 +14,7 @@ bumped:
 
 # make release-tag_name
 # make release-$(git cliff --bumped-version)-alpha.0
-release-%: checks
+release-%: check
 	git cliff -o CHANGELOG.md --tag $*
 	pre-commit run --files CHANGELOG.md || pre-commit run --files CHANGELOG.md
 	git add CHANGELOG.md

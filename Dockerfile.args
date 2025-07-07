@@ -2,7 +2,7 @@ ARG BASE_IMAGE=busybox:1.37.0-glibc@sha256:210ce53959959e79523b8cb0f0bb1cf1c49bf
 
 # hadolint ignore=DL3006
 FROM ${BASE_IMAGE}
-LABEL maintainer="DeadNews <deadnewsgit@gmail.com>"
+LABEL maintainer="deadnews <deadnewsgit@gmail.com>"
 
 USER nobody:nobody
 HEALTHCHECK NONE
