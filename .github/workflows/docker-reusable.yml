@@ -49,7 +49,7 @@ jobs:
       # Install the cosign tool except on PR.
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3.9.1
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
 
       # Add support for more platforms with QEMU.
       - name: Setup QEMU
@@ -122,7 +122,7 @@ jobs:
       # Analyze vulnerabilities.
       - name: Run Trivy vulnerability scanner
         if: github.ref_type == 'tag'
-        uses: aquasecurity/trivy-action@76071ef0d7ec797419534a183b498b4d6366cf37 # 0.31.0
+        uses: aquasecurity/trivy-action@dc5a429b52fcf669ce959baa2c2dd26090d2a6c4 # 0.32.0
         with:
           image-ref: ${{needs.build.outputs.image-ref}}
           format: "sarif"
